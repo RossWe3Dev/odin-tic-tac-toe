@@ -1,3 +1,5 @@
+require "colorize"
+
 class Board
   attr_accessor :array
 
@@ -37,8 +39,8 @@ class Game
 
   def initialize
     @board = Board.new
-    @player_a = Player.new("A", "X")
-    @player_b = Player.new("B", "O")
+    @player_a = Player.new("A", "X".colorize(:red))
+    @player_b = Player.new("B", "O".colorize(:blue))
   end
 
   def play
