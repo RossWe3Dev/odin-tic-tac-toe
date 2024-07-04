@@ -19,18 +19,18 @@ class Board
     puts row3
   end
 
-  def set_mark_position(index, mark)
-    @array[index] = mark
+  def set_marker_position(index, marker)
+    @array[index] = marker
   end
 end
 
 class Player
-  attr_accessor :name, :mark
+  attr_accessor :name, :marker
 
-  def initialize(name, mark)
+  def initialize(name, marker)
     @name = name
-    @mark = mark
-    p "Player #{name} is #{@mark}"
+    @marker = marker
+    p "Player #{name} is #{@marker}"
   end
 end
 
@@ -49,9 +49,9 @@ class Game
   end
 
   def turn(player)
-    puts "Player #{player.name}, where do you want to put your mark? [Please enter a number between 1 and 9]"
+    puts "Player #{player.name}, where do you want to put your marker? [Please enter a number between 1 and 9]"
     position = gets.chomp.to_i
-    board.set_mark_position(position - 1, player.mark)
+    board.set_marker_position(position - 1, player.marker)
     board.display_board
   end
 
