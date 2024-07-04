@@ -32,25 +32,13 @@ class Player
   end
 end
 
-class PlayerA < Player
-  def initialize
-    super("A", "X")
-  end
-end
-
-class PlayerB < Player
-  def initialize
-    super("B", "O")
-  end
-end
-
 class Game
   attr_accessor :player_a, :player_b, :board
 
   def initialize
     @board = Board.new
-    @player_a = PlayerA.new
-    @player_b = PlayerB.new
+    @player_a = Player.new("A", "X")
+    @player_b = Player.new("B", "O")
   end
 
   def play
