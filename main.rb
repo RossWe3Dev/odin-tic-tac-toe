@@ -59,10 +59,14 @@ class Game
   end
 
   def display_winner
-    puts "#{@current_player} has won!" if game_over?(@current_player)
+    puts "Player #{@current_player.name} has won!".colorize(:yellow) if game_over?(current_player)
     return unless board.full?
 
-    game_over? == true ? (puts "#{@current_player} has won!") : (puts "It's a tie!")
+    if game_over?(current_player) == true
+      (puts "Player #{@current_player.name} has won!".colorize(:yellow))
+    else
+      (puts "It's a tie!".colorize(:yellow))
+    end
   end
 end
 
