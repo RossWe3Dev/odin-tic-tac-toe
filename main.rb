@@ -4,17 +4,21 @@ require_relative "lib/board"
 require_relative "lib/player"
 
 class Game
-  attr_accessor :player_a, :player_b, :board
+  WINNING_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].freeze
+
+  attr_accessor :player_a, :player_b, :board, :current_player
 
   def initialize
     @board = Board.new
     @player_a = Player.new("A", "X".colorize(:red))
     @player_b = Player.new("B", "O".colorize(:blue))
+    @current_player = nil
   end
 
   def play
     board.display_board
     game_loop
+    display_winner
   end
 
   def turn(player)
@@ -35,13 +39,30 @@ class Game
   end
 
   def game_loop
-    (1..9).each do |i|
-      if i.even?
-        turn(player_b)
-      else
-        turn(player_a)
-      end
+    @current_player = player_a
+    until board.full?
+      turn(@current_player)
+      break if game_over?(current_player)
+
+      @current_player = switch_current_player
     end
+  end
+
+  def switch_current_player
+    current_player == player_a ? player_b : player_a
+  end
+
+  def game_over?(player)
+    WINNING_COMBINATIONS.any? do |comb|
+      comb.all? { |position| @board.array[position] == player.marker }
+    end
+  end
+
+  def display_winner
+    puts "#{@current_player} has won!" if game_over?(@current_player)
+    return unless board.full?
+
+    game_over? == true ? (puts "#{@current_player} has won!") : (puts "It's a tie!")
   end
 end
 

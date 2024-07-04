@@ -20,4 +20,8 @@ class Board
   def set_marker_position(index, marker)
     @array[index] = marker
   end
+
+  def full?
+    array.none? { |position| position == " " }
+  end
 end
