@@ -8,9 +8,16 @@ def play_game
   puts "~ Let's play tic-tac-toe! ~".upcase.colorize(:cyan)
   game = Game.new
   game.play
+  play_again?
+end
+
+def play_again?
   puts "Press 'y' to play again :) [y/quit]".colorize(:cyan)
-  play_game while gets.chomp.downcase == "y"
-  puts "Thanks for playing!".colorize(:cyan)
+  if gets.chomp.downcase == "y"
+    play_game
+  else
+    puts "Thanks for playing!".colorize(:cyan)
+  end
 end
 
 play_game

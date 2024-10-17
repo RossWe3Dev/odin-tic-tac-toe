@@ -57,10 +57,6 @@ class Game
     puts "Player #{@current_player.name} has won!".colorize(:yellow) if game_over?(current_player)
     return unless board.full?
 
-    if game_over?(current_player) == true
-      (puts "Player #{@current_player.name} has won!".colorize(:yellow))
-    else
-      (puts "It's a tie!".colorize(:yellow))
-    end
+    puts "It's a tie!".colorize(:yellow) unless game_over?(current_player)
   end
 end
